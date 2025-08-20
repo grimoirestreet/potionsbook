@@ -120,11 +120,9 @@
           <select id="dif">
             <option value="">All</option>
             <option>Elementary</option>
-            <option>Basic</option>
             <option>Intermediate</option>
             <option>Advanced</option>
             <option>Master</option>
-            <option>Legendary</option>
           </select>
         </div>
         <div class="field">
@@ -266,7 +264,7 @@ const CANON = {
       'Flobberworm mucus; horklump juice; ground lionfish spines; withering root',
       'Equal mucus + horklump → add ground spines → withering root → heat to earthy brown.',
       '35 minutes','Magical Draughts and Potions — Jigger'),
-    P('Cough Potion','Basic','✅ Students','Soothes coughs; golden syrup',
+    P('Cough Potion','Elementary','✅ Students','Soothes coughs; golden syrup',
       'Honey; thyme essence; eucalyptus; soothing moss; throat‑ease root; lemon balm',
       'Warm honey → thyme → steep eucalyptus → add moss → grate throat‑ease → lemon balm; reduce to syrup.',
       '40 minutes','1 spoonful as needed'),
@@ -282,7 +280,7 @@ const CANON = {
       'Jumping beans; hiccup herbs; spasm seeds; tickling grass; surprise essence',
       'Beans → rapid‑stir herbs → spasm seeds → tickling grass → surprise essence; potion makes small “hic” sounds.',
       '20 minutes'),
-    P('Developing Solution','Basic','✅ Students','Develops moving magical photographs',
+    P('Developing Solution','Elementary','✅ Students','Develops moving magical photographs',
       'Silver nitrate; motion essence; captured movement crystals; temporal fluid; enchanted water',
       'Dissolve silver nitrate in enchanted water → motion essence drops → movement crystals → temporal fluid → gentle mix.',
       '20 minutes'),
@@ -314,7 +312,7 @@ const CANON = {
       'Lion\'s mane mushroom; powdered rooster feathers; golden syrup; courage flower petals; crushed garnets',
       'Prepare lion\'s mane → warm water base → rooster feathers → golden syrup → petals one by one → crushed garnets; stir boldly clockwise to amber glow.',
       '50 minutes','Duration 4–6 hours'),
-    P('Flesh‑Eating Slug Repellent','Basic','✅ Students','Repels flesh‑eating slugs (spray)',
+    P('Flesh‑Eating Slug Repellent','Elementary','✅ Students','Repels flesh‑eating slugs (spray)',
       'Salt crystals; bitter herbs; repelling essence; slug‑bane root; protective spices; garlic extract',
       'Dissolve salt → add bitter herbs → repelling essence → ground slug‑bane → spices → garlic; strong repulsive smell.',
       '25 minutes'),
@@ -337,7 +335,7 @@ const CANON = {
       'Newt spleens; powdered moonstone; unicorn tail hair; dried billywig stings',
       'Medium heat; mash 3 spleens; stir ×7 clockwise; pinch moonstone per year; 1 unicorn hair; simmer 30 min; add stings (1/decade); counter‑stir to pale gold.',
       '45 minutes'),
-    P('Shrinking Solution','High','✅ Third‑Year','Shrinks living creatures; toad test subject → tadpole',
+    P('Shrinking Solution','Intermediate','✅ Third‑Year','Shrinks living creatures; toad test subject → tadpole',
       'Daisy roots; caterpillars; shrivelfigs (skinned); leech juice',
       'Add daisy roots (prepared) → caterpillars at critical temps → skinned shrivelfigs with precise timing → leech juice; maintain exact temperature.',
       '2 hours','Failure may poison subject')
@@ -395,7 +393,7 @@ const CANON = {
       'Peppermint; shrivelfig; porcupine quills; castor beans; wormwood',
       'Color‑shift sequence per syllabus; peppermint counters side‑effects.',
       '2 hours','Side effects: singing; nose‑tweaking'),
-    P('Draught of Peace','Master','✅ Fifth‑Year (Supervised)','Relieves anxiety; turquoise with silvery vapor',
+    P('Draught of Peace','Advanced','✅ Fifth‑Year (Supervised)','Relieves anxiety; turquoise with silvery vapor',
       'Powdered moonstone; syrup of hellebore; porcupine quills; powdered unicorn horn',
       'Precise color‑transition sequence ending turquoise with silver vapor; exact droplet counts; overdose can be fatal.',
       '3–4 hours','Overdose risk: irreversible sleep/death'),
@@ -407,7 +405,7 @@ const CANON = {
       'Truth moss (7‑day steep); honesty herbs (7 days); compulsion crystals (day 14); lunar essence (full moon); revealing root (day 21)',
       'Sequential, lunar‑timed brewing; mature to complete clarity; max dose 3 drops; Occlumency can resist.',
       '28 days','Limit: 3 drops; resistible via Occlumency'),
-    P('Elixir of Life','Legendary','🚫 Not available','Grants immortality (requires Philosopher’s Stone)',
+    P('Elixir of Life','Master','🚫 Not available','Grants immortality (requires Philosopher’s Stone)',
       '—','—','—','Legendary, unavailable'),
     P('Confusing Concoction (Confusing Draught)','Advanced','🚫 Mind‑altering','Causes confusion in drinker; must properly thicken',
       'Scurvy grass; lovage; sneezewort; muddling moss',
@@ -466,9 +464,9 @@ function allowedByYear(dif){
   if(!state.year) return true;
   const lvl = dif||'';
   switch(state.year){
-    case 'y12': return ['Elementary','Basic'].includes(lvl);
-    case 'y35': return ['Elementary','Basic','Intermediate'].includes(lvl);
-    case 'y67': return ['Elementary','Basic','Intermediate','Advanced'].includes(lvl);
+    case 'y12': return ['Elementary'].includes(lvl);
+    case 'y35': return ['Elementary','Intermediate'].includes(lvl);
+    case 'y67': return ['Elementary','Intermediate','Advanced'].includes(lvl);
     case 'post': return true;
     default: return true;
   }
