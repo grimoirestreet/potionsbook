@@ -6,32 +6,21 @@
 <title>Grimoire Street • Potions Compendium (1890s)</title>
 <style>
   :root{
-    --bg:#15181d;          /* page */
-    --panel:#1e232a;       /* main cards */
-    --side:#1b1f25;        /* sidebar */
-    --ink:#eef0f3;         /* text */
-    --muted:#aab0ba;       /* secondary text */
-    --line:#282d35;        /* hairline */
-    --accent:#d3ba7c;      /* bronze */
-    --pill:#262b33;        /* chip */
-    --pill-soft:#222730;
-    --danger:#ff6b6b;
+    --bg:#15181d; --panel:#1e232a; --side:#1b1f25; --ink:#eef0f3; --muted:#aab0ba;
+    --line:#282d35; --accent:#d3ba7c; --pill:#262b33; --pill-soft:#222730;
   }
   html,body{background:var(--bg); color:var(--ink); margin:0; overflow-y:auto}
   body{font-family:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; line-height:1.55}
   *,*::before,*::after{box-sizing:border-box}
   .wrap{max-width:1120px; margin:28px auto; padding:0 16px}
 
-  /* Header */
   h1{margin:0 0 2px 0; font-size:clamp(26px,3.2vw,38px); font-weight:700; letter-spacing:.01em; color:var(--accent)}
   .sub{color:var(--muted); font-size:14px}
   .rule{height:1px; background:var(--line); margin:16px 0 18px}
 
-  /* Layout */
   .grid{display:grid; grid-template-columns:300px 1fr; gap:18px; align-items:start}
   @media(max-width:980px){.grid{grid-template-columns:1fr}}
 
-  /* Sidebar */
   .side{position:static; align-self:start; background:var(--side); border:1px solid var(--line); border-radius:14px; padding:12px}
   @media(min-width:981px){.side.is-sticky{position:sticky; top:12px; will-change:top}}
   .side h2{margin:0 0 10px 0; font-size:13px; color:var(--muted); letter-spacing:.04em; text-transform:uppercase}
@@ -57,13 +46,11 @@
   .tabs button{appearance:none; background:transparent; border:none; text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); cursor:pointer; color:#cfd5de; font-size:14px}
   .tabs button[aria-current="true"]{background:var(--panel); color:var(--accent); font-weight:600}
 
-  /* Panel */
   .panel{background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; align-self:start}
   .panel header{padding:14px; border-bottom:1px solid var(--line)}
   .panel h3{margin:0; font-size:18px; font-weight:700; letter-spacing:.01em; color:var(--accent)}
   .how{padding:10px 14px; border-bottom:1px dashed var(--line); color:var(--muted); font-size:14px}
 
-  /* List */
   .list{display:grid}
   details.item{border-bottom:1px solid var(--line)}
   details.item[open] summary{background:#1d2128}
@@ -82,20 +69,19 @@
   .spec dd{margin:0 0 8px 0}
   .notes{color:#b7bdc7; font-size:13px; margin-top:8px}
   .empty{padding:16px; color:#b7bdc7}
-
   .footer{margin-top:16px; color:#b7bdc7; font-size:12px; text-align:center}
   a{color:var(--accent)}
+  .helper{margin-top:10px;font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <h1>Grimoire Street • Potions Compendium</h1>
-      <div class="sub">Hogwarts Legacy era (1890s). Canon‑only by default. Toggle OC to include approved originals.</div>
+      <div class="sub">Hogwarts Legacy era (1890s). Canon-only by default. Toggle OC to include approved originals.</div>
     </header>
     <div class="rule" aria-hidden="true"></div>
 
-    <!-- Legend -->
     <section class="legend legend-top" aria-label="Legend">
       <h3>Legend • who can brew?</h3>
       <div class="chips">
@@ -108,11 +94,10 @@
     </section>
 
     <div class="grid">
-      <!-- SIDEBAR -->
       <aside class="side" role="complementary">
         <h2>Browse</h2>
         <div class="field">
-          <label for="q">Search</label>
+          <label for="q">Search potions</label>
           <input id="q" class="input" type="text" placeholder="Search name, effect, ingredients, notes…" />
         </div>
         <div class="field">
@@ -132,7 +117,7 @@
             <option value="y12">Years 1–2</option>
             <option value="y35">Years 3–5</option>
             <option value="y67">Years 6–7</option>
-            <option value="post">Post‑grad / Adult</option>
+            <option value="post">Post-grad / Adult</option>
           </select>
         </div>
         <div class="field">
@@ -142,341 +127,75 @@
             <button id="modeAll" aria-pressed="false">Canon + OC</button>
           </div>
         </div>
-
         <div class="tabs" role="tablist" aria-label="Potion Types"></div>
+        <div class="helper">
+          Staff shortcut: <a id="editLink" href="#" target="_blank" rel="noopener">Edit potions-data.json</a>
+        </div>
       </aside>
 
-      <!-- MAIN -->
       <main class="panel" role="region" aria-live="polite">
-        <header>
-          <h3 id="subjectTitle">Healing & Medical</h3>
-        </header>
-        <div class="how"><strong>RP use:</strong> Choose a potion type, then search or filter. Keep brewing within your character’s allowed year group/difficulty. Banned & Combat potions require admin‑approved plots. OC potions show only in Canon+OC mode after staff approval.</div>
-        <section id="list" class="list"></section>
-
-        
+        <header><h3 id="subjectTitle">Loading…</h3></header>
+        <div class="how"><strong>RP use:</strong> Choose a potion type, then search or filter. Keep brewing within your character’s allowed year group/difficulty. Banned & Combat potions require admin-approved plots. OC potions show only in Canon+OC mode after staff approval.</div>
+        <section id="list" class="list"><div class="empty">Loading potions…</div></section>
       </main>
     </div>
-    <p class="footer">Report missing or era‑inaccurate potions to staff.</p>
+    <p class="footer">Report missing or era-inaccurate potions to staff.</p>
   </div>
 
 <script>
-/***********************
- * TYPES & DATA
- ***********************/
-const TYPES = [
-  'Healing & Medical',
-  'Antidotes',
-  'Utility & Academic',
-  'Transformation & Disguise',
-  'Enhancement & Combat (Restricted)',
-  'Forbidden & Controlled',
-  'Player‑Created Potions'
-];
+/** CONFIG: root-level JSON + edit link **/
+const DATA_URL = 'potions-data.json'; // root file (no folders)
+const EDIT_DATA_URL = 'https://github.com/YOURUSER/YOURREPO/edit/main/potions-data.json'; // <-- change me
+document.getElementById('editLink').href = EDIT_DATA_URL;
 
-// Potion helper
-// name, difficulty, restriction, effect, ingredients, instructions, time, notes, appearance, duration, inventor, source, admin
-const P = (name,difficulty,restriction,effect,ingredients,instructions,time,notes='',appearance='',duration='',inventor='',source='') =>
-  ({name,difficulty,restriction,effect,ingredients,instructions,time,notes,appearance,duration,inventor,source});
-
-// ---- CANON DATA (grouped by type) ----
-const CANON = {
-  'Healing & Medical':[
-    P('Wiggenweld Potion','Elementary','✅ Students','Heals minor wounds; awakens from magical sleep; counters Draught of Living Death',
-      'Salamander’s blood; lionfish spines; wiggentree bark; dittany leaves',
-      'Add 5 lionfish spines to heated cauldron → salamander’s blood → finely‑chopped wiggentree bark → dittany leaves → stir clockwise ×7. Complete within 15 seconds.',
-      '15 seconds'),
-    P('Pepperup Potion','Intermediate','✅ Students','Cures cold; warms; steam from ears',
-      'Peppermint oil; warming spices; cold‑fighting herbs; willow bark; honey; steam crystals',
-      'Body‑temp base; add oils, spices, herbs, willow bark, honey, steam crystals until steaming.',
-      '45 minutes','Side effect: steam from ears for ~1 hour','', '', 'Glover Hipworth'),
-    P('Calming Draught','Intermediate','✅ Students','Calms shock, trauma, distress',
-      'Peppermint oil; chamomile; valerian root; soothing moss; peace lily petals',
-      'Steep chamomile → add peppermint carefully → ground valerian → soothing moss → lily petals → simmer to pale blue.',
-      '50 minutes','Dangerous to pets'),
-    P('Dreamless Sleep Potion','Intermediate','⚠️ Medical Wing','Provides dreamless sleep',
-      'Lavender; valerian; dream‑suppressing mushrooms; peaceful moss; slumber seeds; moonstone dust',
-      'Steep lavender → add valerian → mushrooms → moss → seeds → pinch moonstone → simmer to pale purple.',
-      '45 minutes','', '', '6–8 hours'),
-    P('Sleeping Draught','Intermediate','⚠️ Medical Wing','Deep sleep',
-      'Poppy extract; drowsy mushrooms; sleep herbs; valerian; chamomile; slumber moss',
-      'Extract poppy → add mushrooms → steep herbs → add valerian & chamomile → slumber moss → simmer to deep purple.',
-      '50 minutes','', '', '6–8 hours'),
-    P('Skele‑Gro','Advanced','⚠️ Medical Wing','Regrows bones (painful)',
-      'Calcium powder; bone dust; regrowth herbs; structural minerals; healing crystals; growth stimulants; unicorn horn shavings',
-      'Bone‑growth temp; calcium base → bone dust → regrowth herbs → minerals → crystals → stimulants → unicorn shavings; thick chalk‑white.',
-      '3 hours','Severe pain; horrible taste'),
-    P('Blood‑Replenishing Potion','Advanced','⚠️ Medical Wing','Restores blood after loss',
-      'Iron filings; beetroot juice; crushed ruby; 3 drops freely‑given unicorn blood; strengthening nettle; copper shavings',
-      'Body‑temp base → beet juice → iron → crushed ruby → unicorn blood → nettle → copper; deep red, gently pulsing surface.',
-      '1 hr 30 min','Administer hourly as needed'),
-    P('Bruise Removal Paste','Intermediate','✅ Students','Removes bruises (topical)',
-      'Murtlap essence; healing herbs; powdered moonstone; comfrey root; arnica',
-      'Extract murtlap → grind herbs + comfrey → mix with moonstone + arnica to smooth pale‑yellow paste.',
-      '45 minutes','Topical'),
-    P('Burn‑Healing Paste','Intermediate','✅ Students','Heals burns (topical)',
-      'Aloe extract; ground salamander scales; powdered silver unicorn horn; cooling mint; optional phoenix tears',
-      'Blend aloe + scales + silver → mint → optional phoenix tears; pale green, cool to touch.',
-      '30 minutes','Topical'),
-    P('Essence of Dittany','Intermediate','✅ Students','Regrows skin over wounds; silver mix for werewolf bites',
-      'Fresh dittany; healing enhancement oils; (optional) powdered silver',
-      'Press fresh dittany → add oils → mix with silver for lycanthropy wounds → bottle in dark glass.',
-      '30 minutes','Topical'),
-    P('Mandrake Restorative Draught','Advanced','⚠️ Medical Wing','Reverses petrification/cursed transfiguration',
-      'Mature mandrakes (≥12 months)',
-      'Harvest with earmuffs; stew to extract essence; strain; coordinated with Herbology.',
-      'Requires mature plants'),
-    P('Dr. Ubbly’s Oblivious Unction','Advanced','⚠️ Medical Wing','Heals wounds caused by thoughts (apply to temples/forehead)',
-      'Memory moss; thought‑healing herbs; mental balm root; consciousness clay; mind‑mending crystals; peace lily essence',
-      'Steep moss → add herbs → grind root → mix clay → add crystals → finish with peace lily while thinking peaceful thoughts.',
-      '1 hr 15 min'),
-    P('Anti‑Paralysis Potion','Advanced','⚠️ Medical Wing','Heals paralysis',
-      'Mandrake root; powdered lionfish spine; crushed beetles; essence of dittany; phoenix feather ash',
-      'Grate mandrake; boil → add lionfish spine → add beetles counter‑clockwise → lower heat; 3 drops dittany → dust phoenix ash until deep purple with silver smoke.',
-      '1 hr 15 min')
-  ],
-
-  'Antidotes':[
-    P('Antidote to Common Poisons','Advanced','✅ Advanced Students','Reverses common poison effects (golden)',
-      'Bezoar; 7 mistletoe berries; freshly ground unicorn horn',
-      'Crush bezoar → add berries → grind unicorn horn fresh → combine in silver cauldron; gentle heat; simmer 30 min; strain through unicorn hair mesh.',
-      '45 minutes','', '', '', '', 'Magical Draughts and Potions — Jigger'),
-    P('Antidote to Uncommon Poisons','Master','⚠️ Medical Wing','Composite antidote per Golpalott’s Third Law',
-      'Varies (composite greater than sum of parts)',
-      'Identify components → compute composite ratios → combine individual antidotes → neutralize with bezoar base; may require unicorn blood/phoenix tears.',
-      '2–4 hours'),
-    P('Deflating Draught','Intermediate','✅ Students','Deflates anything swollen by magical means (antidote to Swelling Solution)',
-      'Shrivelling fig; deflating bellows essence; compressed air moss; reducing root; shrinking violet petals',
-      'Mash fig → add bellows essence → compressed air moss → reducing root (fine) → violet petals; counter‑stir while visualising deflation to pale blue hiss.',
-      '25 minutes','Usage: antidote to Swelling Solution'),
-    P('Love Potion Antidote','Advanced','⚠️ Medical Wing','Counteracts love potions; crystal‑clear “fresh air” scent',
-      'Clear‑sight herbs; anti‑obsession root; reality‑restoring moss; true‑feeling flowers; independence essence; clarity crystals',
-      'Steep clear‑sight → anti‑obsession → moss → flowers → essence → crystals; administer at first signs.',
-      '1 hour')
-  ],
-
-  'Utility & Academic':[ 
-    P('Cure for Boils (Boil Cure)','Elementary','✅ Year 1','Cures boils; pink smoke when successful',
-      'Dried nettles; crushed snake fangs; stewed horned slugs; porcupine quills',
-      'Heat to exactly 250°F → add 6 crushed fangs (10s heat) → add 4 horned slugs → **remove from fire** → add porcupine quills → stir ×5 clockwise → wand‑wave.',
-      '33–45 minutes','Never add quills while still heating'),
-    P('Herbicide Potion','Elementary','✅ Year 1','Damages/kills plants (coursework/greenhouse control)',
-      'Flobberworm mucus; horklump juice; ground lionfish spines; withering root',
-      'Equal mucus + horklump → add ground spines → withering root → heat to earthy brown.',
-      '35 minutes','Magical Draughts and Potions — Jigger'),
-    P('Cough Potion','Elementary','✅ Students','Soothes coughs; golden syrup',
-      'Honey; thyme essence; eucalyptus; soothing moss; throat‑ease root; lemon balm',
-      'Warm honey → thyme → steep eucalyptus → add moss → grate throat‑ease → lemon balm; reduce to syrup.',
-      '40 minutes','1 spoonful as needed'),
-    P('Forgetfulness Potion','Elementary','✅ Year 1','Induces forgetfulness',
-      'Lethe water; forgetful moss; memory‑erasing mushrooms; absent‑minded grass; confusion seeds',
-      'Lethe base → counter‑stir moss → mushrooms → grass → seeds; simmer to cloudy gray.',
-      '40 minutes','Keep notes while brewing'),
-    P('Hair‑Raising Potion','Elementary','✅ Year 2','Makes hair stand on end; occasional sparks',
-      'Rat tails; static essence; shock grass; standing moss',
-      'Add tails → static essence → shock grass (rapid stir) → standing moss; brew until occasional sparks.',
-      '30 minutes'),
-    P('Hiccoughing Solution','Elementary','✅ Students','Causes hiccups (15–30 min)',
-      'Jumping beans; hiccup herbs; spasm seeds; tickling grass; surprise essence',
-      'Beans → rapid‑stir herbs → spasm seeds → tickling grass → surprise essence; potion makes small “hic” sounds.',
-      '20 minutes'),
-    P('Developing Solution','Elementary','✅ Students','Develops moving magical photographs',
-      'Silver nitrate; motion essence; captured movement crystals; temporal fluid; enchanted water',
-      'Dissolve silver nitrate in enchanted water → motion essence drops → movement crystals → temporal fluid → gentle mix.',
-      '20 minutes'),
-    P('Wideye Potion','Intermediate','✅ Students','Prevents sleep; awakens from drugging/concussion',
-      'Alertness berries; wake‑up root; stimulating crystals; consciousness herbs; anti‑drowsy moss; clarity essence',
-      'Crush berries → grind root → add crystals → herbs → moss → clarity essence; vigorous stir to bright yellow.',
-      '40 minutes','Duration 8–12 hours'),
-    P('Wit‑Sharpening Potion','Advanced','✅ Advanced Students','Enhances mental clarity; antidote to Confusing Concoction',
-      'Brain‑boosting herbs; intelligence crystals; sharp‑mind root; clarity moss; focus berries; wisdom bark',
-      'Steep herbs → crystals → grate sharp‑mind root → clarity moss → focus berries → wisdom bark; concentrate while stirring.',
-      '55 minutes'),
-    P('Invigoration Draught','Intermediate','✅ Students','Boosts energy (4–6 hours)',
-      'Ginseng root; energy crystals; vigorous vine; stimulating spices; powdered caffeine beans; lightning‑caught water',
-      'Grind ginseng → lightning‑water base → energy crystals → vigorous vine → spices → caffeine beans; stir until sparkles.',
-      '35 minutes','Duration 4–6 hours'),
-    P('Beautification Potion','Intermediate','✅ Students','Temporarily enhances appearance',
-      'Rose petals; unicorn hair; powdered pearls; butterfly wings; morning dew; narcissus root',
-      'Collect dew at sunrise → gentle heat → rose petals one by one → unicorn hair → powdered pearls → crushed butterfly wings → grated narcissus root counter‑stir to pearl‑pink shimmer.',
-      '1 hr 45 min','Duration 6–8 hours'),
-    P('Baruffio\'s Brain Elixir','Intermediate','🚫 Banned during examinations','Claims to increase mental agility and concentration',
-      'Ground ginkgo; powdered runespoor eggs; essence of hellebore; grated ginger; newt eyes',
-      'Grind ginkgo → warm water → runespoor eggs (3 pinches) → 5 drops hellebore → grate ginger → add newt eyes; simmer 20 minutes to bright yellow; peppermint/ginger scent.',
-      '30 minutes','Effectiveness variable; placebo suspected'),
-    P('Alihotsy Draught','Intermediate','✅ Advanced Students','Causes hysterical laughter',
-      'Alihotsy leaves; giggling water; powdered fairy wings',
-      'Crush leaves to purple juice → add to 2 cups giggling water → gentle heat with clockwise stir → when tiny pops appear, add powdered fairy wings → continue until bright pink and giggling.',
-      '25 minutes'),
-    P('Confidence Potion','Intermediate','✅ Students','Temporarily boosts confidence (4–6 hrs)',
-      'Lion\'s mane mushroom; powdered rooster feathers; golden syrup; courage flower petals; crushed garnets',
-      'Prepare lion\'s mane → warm water base → rooster feathers → golden syrup → petals one by one → crushed garnets; stir boldly clockwise to amber glow.',
-      '50 minutes','Duration 4–6 hours'),
-    P('Flesh‑Eating Slug Repellent','Elementary','✅ Students','Repels flesh‑eating slugs (spray)',
-      'Salt crystals; bitter herbs; repelling essence; slug‑bane root; protective spices; garlic extract',
-      'Dissolve salt → add bitter herbs → repelling essence → ground slug‑bane → spices → garlic; strong repulsive smell.',
-      '25 minutes'),
-    P('Laugh‑Inducing Potion','Intermediate','✅ Students','Causes uncontrollable laughter (1–2 hrs)',
-      'Giggling grass; tickling mushrooms; joy berries; humor herbs; laughing‑gas essence; comedy crystals',
-      'Giggling grass → chopped mushrooms → joy berries → herbs while thinking funny thoughts → gas essence → crystals; bubbles with laughter.',
-      '30 minutes','Duration 1–2 hours')
-  ],
-
-  'Transformation & Disguise':[
-    P('Polyjuice Potion','Master','🚫 Forbidden','Transforms drinker into another person',
-      'Lacewing flies (stewed 21 days); fluxweed (picked full moon); boomslang skin; horn of bicorn; target’s hair/body part',
-      'Timed sequence per Restricted Section; add target sample before dosing; extreme caution.',
-      '~1 month','Appearance varies by target','10 min–12 hrs','', 'Moste Potente Potions'),
-    P('Invisibility Potion','Advanced','🚫 Banned (Stealth)','Renders drinker invisible',
-      'Leaping toadstool cap; knotgrass sprig; troll bogey',
-      'Cap → knotgrass → troll bogey; brew exactly 60 seconds.',
-      '60 seconds'),
-    P('Ageing Potion','Intermediate','🚫 Banned','Temporarily ages the drinker (dosage‑based)',
-      'Newt spleens; powdered moonstone; unicorn tail hair; dried billywig stings',
-      'Medium heat; mash 3 spleens; stir ×7 clockwise; pinch moonstone per year; 1 unicorn hair; simmer 30 min; add stings (1/decade); counter‑stir to pale gold.',
-      '45 minutes'),
-    P('Shrinking Solution','Intermediate','✅ Third‑Year','Shrinks living creatures; toad test subject → tadpole',
-      'Daisy roots; caterpillars; shrivelfigs (skinned); leech juice',
-      'Add daisy roots (prepared) → caterpillars at critical temps → skinned shrivelfigs with precise timing → leech juice; maintain exact temperature.',
-      '2 hours','Failure may poison subject')
-  ],
-
-  'Enhancement & Combat (Restricted)':[
-    P('Fire Protection Potion','Advanced','✅ Advanced Students','Protects from burns (2–3 hrs)',
-      'Salamander blood; asbestos powder; fire‑resistant scales; phoenix ash; cooling crystals; flame‑proof moss',
-      'Medium heat; salamander base → asbestos → ground scales → phoenix ash → cooling crystals → moss.',
-      '1 hr 30 min','Duration 2–3 hours'),
-    P('Edurus Potion','Advanced','🚫 Combat','Rock‑like skin (20s)',
-      'Ashwinder eggs; mongrel fur',
-      'Crack eggs → add fur → stir clockwise; brew exactly 30 seconds.',
-      '30 seconds','Duration ~20 seconds'),
-    P('Maxima Potion','Advanced','🚫 Combat','Increases spell damage (30s)',
-      'Leech juice; spider fang',
-      'Leech juice → spider fang; brew 30 seconds.',
-      '30 seconds','Duration ~30 seconds'),
-    P('Focus Potion','Advanced','🚫 Combat','Reduces spell cooldown times (brief)',
-      'Dugbog tongue; lacewing flies',
-      'Add tongue → add flies; brew 60 seconds.',
-      '60 seconds'),
-    P('Thunderbrew Potion','Advanced','🚫 Combat','Storm aura stuns/damages nearby enemies',
-      'Leech juice; shrivelfig; stench of the dead (Inferius)',
-      'Leech juice → shrivelfig → stench; clockwise stir; brew exactly 90 seconds.',
-      '90 seconds'),
-    P('Strengthening Solution','Intermediate','🚫 Enhancement','Temporarily increases physical strength',
-      'Salamander blood; powdered griffin claw; strength‑enhancing herbs',
-      'Blood base → griffin claw → strength herbs; staged brew over several days until inner glow.',
-      'Several days'),
-    P('Felix Felicis (Liquid Luck)','Master','🚫 Banned in exams/competitions','Grants extraordinary luck',
-      'Ashwinder egg; horseradish; squill bulb juice; murtlap tentacle; tincture of thyme; occamy eggshell; powdered common rue',
-      'Precise lunar timing; ingredients added in exact order; stir at dawn daily for 183 days at constant temperature; drops leap like goldfish when finished.',
-      'Six months','Side effects: giddiness, overconfidence','', 'Zygmunt Budge (16th c.)')
-  ],
-
-  'Forbidden & Controlled':[
-    P('Amortentia','Advanced','🚫 Banned (Love)','Strongest love potion; obsession, not true love',
-      'Pearl dust; ashwinder eggs; rose thorns (dawn); peppermint; moonstone; essence of belladonna',
-      'Pearl dust base in silver cauldron at 150°F → eggs (figure‑8 stir) → thorns → peppermint → moonstone → 3 drops belladonna → mature 7 days; daily stir.',
-      '7 days','Mother‑of‑pearl sheen; spiraling steam'),
-    P('Babbling Beverage','Advanced','🚫 Mind‑altering','Uncontrollable nonsensical speech',
-      'Tongue‑twisting treacle; confused newt eyes; babbling brook water; powdered fool’s parsley',
-      'Heat brook water until it whispers → treacle (figure‑8) → eyes one by one → parsley → erratic 5‑min stir; potion mutters.',
-      '35 minutes'),
-    P('Befuddlement Draught','Advanced','🚫 Mind‑altering','Confusion and reckless behavior',
-      'Scurvy grass; lovage; sneezewort; confusion moss',
-      'Chop scurvy grass → alternate pinches of lovage & sneezewort → random‑stir moss → heat until unpredictable swirl.',
-      '40 minutes'),
-    P('Dizziness Draught','Intermediate','🚫 Dangerous','Dizziness/lightheadedness (visual swirl)',
-      'Spinning seeds; vertigo vine; whirling moss; confusion grass; dizzy daisy petals',
-      'Rapid stir with seeds → add vine → circular moss → figure‑8 grass → daisy petals; erratic stir until swirl.',
-      '30 minutes'),
-    P('Elixir to Induce Euphoria','Advanced','✅ Sixth‑Year','Irrational happiness; sunshine yellow',
-      'Peppermint; shrivelfig; porcupine quills; castor beans; wormwood',
-      'Color‑shift sequence per syllabus; peppermint counters side‑effects.',
-      '2 hours','Side effects: singing; nose‑tweaking'),
-    P('Draught of Peace','Advanced','✅ Fifth‑Year (Supervised)','Relieves anxiety; turquoise with silvery vapor',
-      'Powdered moonstone; syrup of hellebore; porcupine quills; powdered unicorn horn',
-      'Precise color‑transition sequence ending turquoise with silver vapor; exact droplet counts; overdose can be fatal.',
-      '3–4 hours','Overdose risk: irreversible sleep/death'),
-    P('Black Fire Potion','Advanced','🚫 Special Authorization','Allows passage through black fire',
-      'Salamander scales; phoenix feather; fire seed pods; dragon blood; asbestos powder; flame‑resistant moss',
-      'Extreme magical fire → scales → feather → seed pods → pour dragon blood while clockwise stir → asbestos → moss; glows red‑orange.',
-      '2 hours'),
-    P('Veritaserum','Master','🚫 Ministry‑controlled','Forces truthfulness; clear, tasteless',
-      'Truth moss (7‑day steep); honesty herbs (7 days); compulsion crystals (day 14); lunar essence (full moon); revealing root (day 21)',
-      'Sequential, lunar‑timed brewing; mature to complete clarity; max dose 3 drops; Occlumency can resist.',
-      '28 days','Limit: 3 drops; resistible via Occlumency'),
-    P('Elixir of Life','Master','🚫 Not available','Grants immortality (requires Philosopher’s Stone)',
-      '—','—','—','Legendary, unavailable'),
-    P('Confusing Concoction (Confusing Draught)','Advanced','🚫 Mind‑altering','Causes confusion in drinker; must properly thicken',
-      'Scurvy grass; lovage; sneezewort; muddling moss',
-      'Chop scurvy grass with silver knife → lovage clockwise → sneezewort in increments → muddling moss counter‑stir → brew until thick/viscous gray or it fails.',
-      'Extended','Common failure: doesn’t thicken'),
-    P('Swelling Solution','Intermediate','🚫 Dangerous if splashed','Causes dramatic enlargement on contact',
-      'Salamander blood; puffing powder; expansion essence',
-      'Blood base → puffing powder → expansion essence → heat to vigorous bubbling.',
-      '40 minutes'),
-    P('Draught of Living Death','Master','🚫 Faculty & Adults only','Places drinker in death‑like sleep',
-      'Powdered root of asphodel; infusion of wormwood; valerian roots; sopophorous bean; hellebore essence',
-      'Asphodel into wormwood → chopped (not crushed) valerian → slice sopophorous bean with flat silver dagger for more juice → counter‑stir to pale pink → add 13 drops hellebore → should turn clear when perfect.',
-      '3 hours')
-  ],
-
-  'Player‑Created Potions':[]
-};
-
-// OC container (empty by default)
-const OC = Object.fromEntries(TYPES.map(t=>[t,[]]));
-
-/***********************
- * APP
- ***********************/
-const $ = s=>document.querySelector(s);
-const sideTabs = document.querySelector('.tabs');
+/** DOM helpers **/
+const $ = s => document.querySelector(s);
 const listEl = $('#list');
-const subjectTitle = $('#subjectTitle');
 const sideEl = document.querySelector('.side');
+const sideTabs = document.querySelector('.tabs');
+const subjectTitle = $('#subjectTitle');
 
+/** Sticky aside **/
 function updateSticky(){
   const fits = window.innerWidth >= 981 && (sideEl.scrollHeight + 24) <= window.innerHeight;
   sideEl.classList.toggle('is-sticky', fits);
 }
 
-const state = { q:'', dif:'', year:'', subject: TYPES[0], oc:false };
+/** State **/
+const state = { q:'', dif:'', year:'', subject:'', oc:false };
+let POTIONS = []; // flat array of potions with {type, oc, ...}
+let TYPES = [];   // strings
 
 function buildTabs(){
   sideTabs.innerHTML='';
-  TYPES.forEach(s=>{
+  TYPES.forEach(t=>{
     const b=document.createElement('button');
-    b.textContent=s;
-    b.setAttribute('aria-current', String(state.subject===s));
-    b.addEventListener('click', ()=>{ state.subject=s; render(); });
+    b.textContent=t;
+    b.setAttribute('aria-current', String(state.subject===t));
+    b.addEventListener('click', ()=>{ state.subject=t; render(); });
     sideTabs.appendChild(b);
   });
 }
 
-function dataFor(type){
-  const canon = CANON[type]||[];
-  const oc = state.oc ? (OC[type]||[]) : [];
-  return [...canon.map(x=>({...x, oc:false})), ...oc.map(x=>({...x, oc:true}))];
-}
-
 function allowedByYear(dif){
   if(!state.year) return true;
-  const lvl = dif||'';
   switch(state.year){
-    case 'y12': return ['Elementary'].includes(lvl);
-    case 'y35': return ['Elementary','Intermediate'].includes(lvl);
-    case 'y67': return ['Elementary','Intermediate','Advanced'].includes(lvl);
+    case 'y12': return dif==='Elementary';
+    case 'y35': return dif==='Elementary'||dif==='Intermediate';
+    case 'y67': return dif==='Elementary'||dif==='Intermediate'||dif==='Advanced';
     case 'post': return true;
     default: return true;
   }
 }
-
 function matches(pt){
   if(state.dif && pt.difficulty!==state.dif) return false;
   if(!allowedByYear(pt.difficulty)) return false;
+  if(!state.oc && pt.oc) return false;
   if(state.q){
-    const blob=((pt.name||'')+' '+(pt.effect||'')+' '+(pt.ingredients||'')+' '+(pt.notes||'')+' '+(pt.restriction||'')+' '+(pt.appearance||'')+' '+(pt.inventor||'')+' '+(pt.source||'')).toLowerCase();
+    const blob=[
+      pt.name, pt.effect, pt.ingredients, pt.notes, pt.restriction,
+      pt.appearance, pt.inventor, pt.source
+    ].filter(Boolean).join(' ').toLowerCase();
     if(!blob.includes(state.q)) return false;
   }
   return true;
@@ -520,32 +239,68 @@ function makeRow(pt){
 }
 
 function render(){
-  // tabs current state
   [...sideTabs.children].forEach(btn=> btn.setAttribute('aria-current', String(btn.textContent===state.subject)));
-  subjectTitle.textContent = state.subject;
+  subjectTitle.textContent = state.subject || 'Potions';
 
-  const items = dataFor(state.subject).filter(matches).sort((a,b)=> a.name.localeCompare(b.name));
+  const items = POTIONS.filter(p=>p.type===state.subject).filter(matches).sort((a,b)=> a.name.localeCompare(b.name));
   listEl.innerHTML='';
   if(!items.length){
-    const d=document.createElement('div'); d.className='empty'; d.textContent='No entries. Add potions to the data or loosen filters.';
-    listEl.appendChild(d);
-    return;
+    const d=document.createElement('div'); d.className='empty'; d.textContent='No entries. Edit potions-data.json or loosen filters.';
+    listEl.appendChild(d); return;
   }
   items.forEach(pt=> listEl.appendChild(makeRow(pt)));
 }
 
-// Controls
-$('#q').addEventListener('input', e=>{ state.q=e.target.value.trim().toLowerCase(); render(); });
-$('#dif').addEventListener('change', e=>{ state.dif=e.target.value; render(); });
-$('#year').addEventListener('change', e=>{ state.year=e.target.value; render(); });
-$('#modeCanon').addEventListener('click', ()=>{ state.oc=false; $('#modeCanon').setAttribute('aria-pressed','true'); $('#modeAll').setAttribute('aria-pressed','false'); render(); });
-$('#modeAll').addEventListener('click', ()=>{ state.oc=true; $('#modeAll').setAttribute('aria-pressed','true'); $('#modeCanon').setAttribute('aria-pressed','false'); render(); });
+async function boot(){
+  try{
+    const res = await fetch(DATA_URL, { cache:'no-store' });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const data = await res.json();
 
-// Boot
-buildTabs();
-updateSticky();
-window.addEventListener('resize', updateSticky);
-render();
+    // Accept either {types, potions} or derive from potions[].type
+    const potions = Array.isArray(data) ? data : (data.potions||[]);
+    POTIONS = potions.map(p => ({
+      oc: !!p.oc,
+      type: p.type || 'Utility & Academic',
+      name: p.name || 'Untitled Potion',
+      difficulty: p.difficulty || '',
+      restriction: p.restriction || '',
+      effect: p.effect || '',
+      ingredients: p.ingredients || '',
+      instructions: p.instructions || '',
+      time: p.time || '',
+      notes: p.notes || '',
+      appearance: p.appearance || '',
+      duration: p.duration || '',
+      inventor: p.inventor || '',
+      source: p.source || ''
+    }));
+
+    TYPES = Array.isArray(data.types) && data.types.length
+      ? data.types
+      : Array.from(new Set(POTIONS.map(p=>p.type))).sort();
+
+    if(!TYPES.includes('Player-Created Potions')) TYPES.push('Player-Created Potions');
+
+    state.subject = TYPES[0] || 'Utility & Academic';
+
+    buildTabs();
+    render();
+    updateSticky();
+    window.addEventListener('resize', updateSticky);
+
+    // Controls
+    $('#q').addEventListener('input', e=>{ state.q=e.target.value.trim().toLowerCase(); render(); });
+    $('#dif').addEventListener('change', e=>{ state.dif=e.target.value; render(); });
+    $('#year').addEventListener('change', e=>{ state.year=e.target.value; render(); });
+    $('#modeCanon').addEventListener('click', ()=>{ state.oc=false; $('#modeCanon').setAttribute('aria-pressed','true'); $('#modeAll').setAttribute('aria-pressed','false'); render(); });
+    $('#modeAll').addEventListener('click', ()=>{ state.oc=true;  $('#modeAll').setAttribute('aria-pressed','true');  $('#modeCanon').setAttribute('aria-pressed','false'); render(); });
+
+  }catch(err){
+    listEl.innerHTML = `<div class="empty">Could not load <code>${DATA_URL}</code>. Ensure it exists at the repo root and JSON is valid.<br><small>${String(err)}</small></div>`;
+  }
+}
+boot();
 </script>
 </body>
 </html>
